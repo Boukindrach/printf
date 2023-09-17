@@ -39,7 +39,6 @@ int _printf(const char *format, ...)
 						write(1, str, 1), str++, i++;
 				}
 				else
-				{
 					write(1, ("NULL"), 6), i += 6;
 			}
 			else if (*format == '%')
