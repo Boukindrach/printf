@@ -43,6 +43,8 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == '%')
 				write(1, "%", 1), i++;
+			else
+				write (1, "%", 1), i++, write(1, format, 1), i++;
 		}
 		format++;
 	}
