@@ -2,6 +2,15 @@
 #include <unistd.h>
 #include "main.h"
 #include <stdio.h>
+#include <string.h>
+
+int printf_int(int num)
+{
+	char buffer[12];
+	int len = snprintf(buffer, sizeof(buffer), "%d", num);
+	write(1, buffer, len);
+	return (len);
+}
 
 /**
  * _printf- produces output according to a format
@@ -12,7 +21,7 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i = 0;
+	int i = 0, num;
 	char *str;
 
 	va_start(args, format);
@@ -43,6 +52,11 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == '%')
 				write(1, "%", 1), i++;
+			else if (*format == 'd' || *format == 'i')
+			{
+				num = va_arg(args, int);
+				i += printf_int(num);
+			}
 			else
 				write(1, "%", 1), i++, write(1, format, 1), i++;
 		}
